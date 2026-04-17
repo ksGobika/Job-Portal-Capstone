@@ -513,7 +513,7 @@ export default function JobDetails({ params }) {
   );
 }*/
 
-"use client";
+/*"use client";
 import React, { useState, useEffect } from 'react'; // 1. Import React
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
@@ -668,6 +668,404 @@ export default function JobDetails({ params }) {
     💬 Message Employer
   </button>
 )}
+    </div>
+  );
+}*/
+
+/*"use client";
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useRouter, useSearchParams } from 'next/navigation';
+
+export default function JobDetails({ params }) {
+  const { id } = React.use(params);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const { user, isAuthenticated } = useSelector((state) => state.auth || {});
+
+  const [job, setJob] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [applied, setApplied] = useState(false);
+  const [applicationId, setApplicationId] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+  const [coverLetter, setCoverLetter] = useState("");
+  const [resumeLink, setResumeLink] = useState("");
+
+  useEffect(() => {
+    const shouldOpenForm = searchParams.get('apply');
+    if (shouldOpenForm === 'true' && isAuthenticated) {
+      setShowForm(true);
+    }
+
+    const fetchDetails = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/jobs/${id}`);
+        const data = await res.json();
+        setJob(data);
+
+        if (isAuthenticated && user) {
+          const appRes = await fetch(`http://localhost:5000/applications?jobId=${id}&seekerId=${user.id}`);
+          const appData = await appRes.json();
+          if (appData.length > 0) {
+            setApplied(true);
+            setApplicationId(appData[0].id);
+          }
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDetails();
+  }, [id, isAuthenticated, user, searchParams]);
+
+  const handleSubmitApplication = async (e) => {
+    e.preventDefault();
+    const applicationData = {
+      jobId: job.id,
+      jobTitle: job.title,
+      employerId: job.employerId,
+      seekerId: user.id,
+      seekerName: user.name,
+      coverLetter,
+      resume: resumeLink,
+      status: "applied",
+      appliedAt: new Date().toISOString()
+    };
+
+    const res = await fetch('http://localhost:5000/applications', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(applicationData)
+    });
+
+    if (res.ok) {
+      const saved = await res.json();
+      setApplied(true);
+      setApplicationId(saved.id);
+      setShowForm(false);
+      alert("Application Submitted!");
+    }
+  };
+
+  const handleWithdraw = async () => {
+    if (window.confirm("Withdraw your application?")) {
+      await fetch(`http://localhost:5000/applications/${applicationId}`, { method: 'DELETE' });
+      setApplied(false);
+      setApplicationId(null);
+    }
+  };
+
+  if (loading) return <div className="p-20 text-center text-black font-bold">Loading Details...</div>;
+  if (!job) return <div className="p-20 text-center text-black">Job not found</div>;
+
+  return (
+    <div className="max-w-4xl mx-auto p-6 lg:p-12 bg-gray-50 min-h-screen">
+      <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
+        
+        
+        <div className="p-8 border-b bg-white">
+          <h1 className="text-4xl font-extrabold text-blue-900">{job.title}</h1>
+          <p className="text-xl text-gray-700 mt-2 font-medium">{job.location} | {job.jobType}</p>
+        </div>
+
+        <div className="p-8">
+         
+          <div className="grid grid-cols-2 gap-6 mb-10 bg-gray-50 p-6 rounded-2xl border border-gray-100">
+            <div>
+              <p className="text-gray-500 text-sm font-bold uppercase tracking-wider">Salary</p>
+              <p className="text-xl font-black text-gray-900">{job.salaryRange}</p>
+            </div>
+            <div>
+              <p className="text-gray-500 text-sm font-bold uppercase tracking-wider">Experience</p>
+              <p className="text-xl font-black text-gray-900">{job.experienceLevel}</p>
+            </div>
+            <div>
+              <p className="text-gray-500 text-sm font-bold uppercase tracking-wider">Industry</p>
+              <p className="text-xl font-black text-gray-900">{job.industry}</p>
+            </div>
+            <div>
+              <p className="text-gray-500 text-sm font-bold uppercase tracking-wider">Deadline</p>
+              <p className="text-xl font-black text-gray-900">{job.deadline}</p>
+            </div>
+          </div>
+
+         
+          <div className="mb-10">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">Description</h3>
+            <p className="text-gray-700 leading-relaxed text-lg whitespace-pre-line">
+              {job.description}
+            </p>
+          </div>
+
+         
+          {!applied && !showForm && (
+            <button 
+              onClick={() => isAuthenticated ? setShowForm(true) : router.push('/login')}
+              className="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold text-xl hover:bg-blue-700 shadow-lg transition"
+            >
+              Apply Now
+            </button>
+          )}
+
+          {applied && (
+            <div className="space-y-4">
+              <div className="bg-green-100 text-green-800 p-4 rounded-2xl text-center font-bold text-lg border border-green-200">
+                ✓ You have applied for this position
+              </div>
+              <button 
+                onClick={handleWithdraw} 
+                className="w-full text-red-600 font-extrabold text-lg hover:underline transition"
+              >
+                Withdraw Application
+              </button>
+            </div>
+          )}
+
+         
+            onClick={() => router.push(`/seeker/messages?targetId=${job.employerId}&targetName=${job.companyName || 'Employer'}`)}
+            className="mt-6 w-full bg-slate-900 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-black transition shadow-lg"
+          >
+            <span>💬</span> Message Employer
+          </button>
+        </div>
+      </div>
+
+      
+      {showForm && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="bg-white p-8 rounded-3xl w-full max-w-lg shadow-2xl border border-gray-200">
+            <h2 className="text-2xl font-bold mb-6 text-gray-900">Submit Application</h2>
+            <form onSubmit={handleSubmitApplication} className="space-y-4">
+              <input 
+                type="url" required placeholder="Paste your Resume Link (Google Drive)" 
+                className="w-full p-4 border rounded-xl text-black bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+                onChange={e => setResumeLink(e.target.value)} 
+              />
+              <textarea 
+                required placeholder="Why are you a good fit?" rows="5"
+                className="w-full p-4 border rounded-xl text-black bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+                onChange={e => setCoverLetter(e.target.value)}
+              />
+              <div className="flex gap-3">
+                <button type="submit" className="flex-1 bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 shadow-md">Submit</button>
+                <button type="button" onClick={() => setShowForm(false)} className="px-6 py-3 text-gray-600 font-bold hover:text-black">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}*/
+
+
+"use client";
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useRouter, useSearchParams } from 'next/navigation';
+
+export default function JobDetails({ params }) {
+  // 1. Unwrap params for Next.js 15
+  const { id } = React.use(params);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const { user, isAuthenticated } = useSelector((state) => state.auth || {});
+
+  const [job, setJob] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [applied, setApplied] = useState(false);
+  const [applicationId, setApplicationId] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+  const [coverLetter, setCoverLetter] = useState("");
+  const [resumeLink, setResumeLink] = useState("");
+
+  useEffect(() => {
+    // Handling Quick Apply from Job Card
+    const shouldOpenForm = searchParams.get('apply');
+    if (shouldOpenForm === 'true' && isAuthenticated) {
+      setShowForm(true);
+    }
+
+    const fetchDetailsAndTrackView = async () => {
+      try {
+        // A. Fetch Job Details
+        const res = await fetch(`http://localhost:5000/jobs/${id}`);
+        const data = await res.json();
+        setJob(data);
+
+        // B. PERFORMANCE METRICS LOGIC (Requirement B-5)
+        // Increment view count in database
+        await fetch(`http://localhost:5000/jobs/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ views: (data.views || 0) + 1 })
+        });
+
+        // C. Check application status
+        if (isAuthenticated && user) {
+          const appRes = await fetch(`http://localhost:5000/applications?jobId=${id}&seekerId=${user.id}`);
+          const appData = await appRes.json();
+          if (appData.length > 0) {
+            setApplied(true);
+            setApplicationId(appData[0].id);
+          }
+        }
+      } catch (err) {
+        console.error("Fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDetailsAndTrackView();
+  }, [id, isAuthenticated, user, searchParams]);
+
+  const handleSubmitApplication = async (e) => {
+    e.preventDefault();
+    const applicationData = {
+      jobId: job.id,
+      jobTitle: job.title,
+      employerId: job.employerId,
+      seekerId: user.id,
+      seekerName: user.name,
+      coverLetter,
+      resume: resumeLink,
+      status: "applied",
+      appliedAt: new Date().toISOString()
+    };
+
+    const res = await fetch('http://localhost:5000/applications', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(applicationData)
+    });
+
+    if (res.ok) {
+      const saved = await res.json();
+      setApplied(true);
+      setApplicationId(saved.id);
+      setShowForm(false);
+      alert("Application Submitted!");
+    }
+  };
+
+  const handleWithdraw = async () => {
+    if (window.confirm("Are you sure you want to withdraw your application?")) {
+      await fetch(`http://localhost:5000/applications/${applicationId}`, { method: 'DELETE' });
+      setApplied(false);
+      setApplicationId(null);
+      alert("Application Withdrawn.");
+    }
+  };
+
+  if (loading) return <div className="p-20 text-center text-black font-bold text-xl">Loading Job Details...</div>;
+  if (!job) return <div className="p-20 text-center text-black text-xl">Job not found.</div>;
+
+  return (
+    <div className="max-w-4xl mx-auto p-6 lg:p-12 bg-gray-50 min-h-screen">
+      <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
+        
+        {/* Header Section */}
+        <div className="p-8 border-b bg-white">
+          <h1 className="text-4xl font-black text-blue-900 leading-tight">{job.title}</h1>
+          <p className="text-xl text-gray-800 mt-2 font-bold">{job.location} | {job.jobType}</p>
+        </div>
+
+        <div className="p-8">
+          {/* Performance Stats Grid */}
+          <div className="grid grid-cols-2 gap-6 mb-10 bg-slate-50 p-6 rounded-2xl border border-slate-100">
+            <div>
+              <p className="text-gray-500 text-xs font-black uppercase tracking-widest">Salary Range</p>
+              <p className="text-2xl font-black text-gray-900">{job.salaryRange}</p>
+            </div>
+            <div>
+              <p className="text-gray-500 text-xs font-black uppercase tracking-widest">Experience</p>
+              <p className="text-2xl font-black text-gray-900">{job.experienceLevel}</p>
+            </div>
+            <div>
+              <p className="text-gray-500 text-xs font-black uppercase tracking-widest">Industry</p>
+              <p className="text-2xl font-black text-gray-900">{job.industry}</p>
+            </div>
+            <div>
+              <p className="text-gray-500 text-xs font-black uppercase tracking-widest">Deadline</p>
+              <p className="text-2xl font-black text-gray-900">{job.deadline}</p>
+            </div>
+          </div>
+
+          {/* Job Description */}
+          <div className="mb-10">
+            <h3 className="text-2xl font-black text-gray-900 mb-4 border-b-2 border-blue-100 pb-2">Job Description</h3>
+            <p className="text-gray-800 leading-relaxed text-lg font-medium whitespace-pre-line">
+              {job.description}
+            </p>
+          </div>
+
+          {/* Primary Action Buttons */}
+          {!applied && !showForm && (
+            <button 
+              onClick={() => isAuthenticated ? setShowForm(true) : router.push('/login')}
+              className="w-full bg-blue-600 text-white py-4 rounded-2xl font-black text-xl hover:bg-blue-700 shadow-xl transition active:scale-95"
+            >
+              Apply Now
+            </button>
+          )}
+
+          {applied && (
+            <div className="space-y-4">
+              <div className="bg-green-100 text-green-900 p-5 rounded-2xl text-center font-black text-xl border-2 border-green-200">
+                ✓ Application Submitted
+              </div>
+              <button 
+                onClick={handleWithdraw} 
+                className="w-full text-red-600 font-black text-lg hover:underline transition"
+              >
+                Withdraw My Application
+              </button>
+            </div>
+          )}
+
+          {/* Messaging Link */}
+          <button 
+            onClick={() => router.push(`/seeker/messages?targetId=${job.employerId}&targetName=${job.companyName || 'Employer'}`)}
+            className="mt-6 w-full bg-slate-900 text-white py-4 rounded-2xl font-black flex items-center justify-center gap-3 hover:bg-black transition shadow-lg"
+          >
+            <span className="text-2xl">💬</span> Message Employer
+          </button>
+        </div>
+      </div>
+
+      {/* Pop-up Application Form */}
+      {showForm && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 z-50">
+          <div className="bg-white p-10 rounded-[2.5rem] w-full max-w-lg shadow-2xl border border-gray-200 animate-in zoom-in-95 duration-200">
+            <h2 className="text-3xl font-black mb-6 text-gray-900">Complete Application</h2>
+            <form onSubmit={handleSubmitApplication} className="space-y-5">
+              <div>
+                <label className="block text-gray-700 font-bold mb-2 ml-1">Resume Link (Google Drive)</label>
+                <input 
+                  type="url" required placeholder="https://drive.google.com/..." 
+                  className="w-full p-4 border-2 rounded-2xl text-black bg-gray-50 focus:border-blue-500 outline-none font-medium"
+                  onChange={e => setResumeLink(e.target.value)} 
+                />
+              </div>
+              <div>
+                <label className="block text-gray-700 font-bold mb-2 ml-1">Cover Letter</label>
+                <textarea 
+                  required placeholder="Describe your experience..." rows="5"
+                  className="w-full p-4 border-2 rounded-2xl text-black bg-gray-50 focus:border-blue-500 outline-none font-medium"
+                  onChange={e => setCoverLetter(e.target.value)}
+                />
+              </div>
+              <div className="flex gap-4 pt-2">
+                <button type="submit" className="flex-1 bg-blue-600 text-white py-4 rounded-2xl font-black hover:bg-blue-700 shadow-lg">Submit</button>
+                <button type="button" onClick={() => setShowForm(false)} className="px-6 py-4 text-gray-500 font-black hover:text-black">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

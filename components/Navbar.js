@@ -221,7 +221,7 @@ export default function Navbar() {
   );
 }*/
 
-"use client";
+/*"use client";
 
 import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
@@ -257,7 +257,7 @@ export default function Navbar() {
     <nav className="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
         
-        {/* LEFT SIDE: Logo and Main Nav */}
+     
         <div className="flex items-center space-x-8">
           <Link href="/" className="text-2xl font-extrabold text-blue-400 tracking-tighter">
             JobPortal
@@ -266,7 +266,7 @@ export default function Navbar() {
           <div className="hidden md:flex space-x-6 text-sm font-medium">
             <Link href="/jobs" className="hover:text-blue-400 transition">Find Jobs</Link>
             
-            {/* SEEKER LINKS */}
+
             {isAuthenticated && user?.role === 'seeker' && (
               <>
                 <Link href="/seeker/profile" className="hover:text-blue-400 transition">Profile</Link>
@@ -275,7 +275,7 @@ export default function Navbar() {
               </>
             )}
 
-            {/* EMPLOYER LINKS */}
+    
             {isAuthenticated && user?.role === 'employer' && (
               <>
                 <Link href="/employer/dashboard" className="hover:text-blue-400 transition">Dashboard</Link>
@@ -285,11 +285,11 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* RIGHT SIDE: User Actions */}
+    
         <div className="flex items-center space-x-4">
           {isAuthenticated ? (
             <div className="flex items-center space-x-4">
-              {/* User Identity Pill */}
+
               <Link 
                 href={user?.role === 'seeker' ? "/seeker/profile" : "/employer/dashboard"}
                 className="flex items-center bg-slate-800 border border-slate-700 hover:border-blue-500 rounded-full px-4 py-1.5 transition"
@@ -298,7 +298,7 @@ export default function Navbar() {
                 <span className="text-sm font-semibold text-blue-100">{user?.name}</span>
               </Link>
               
-              {/* Logout Button */}
+  
               <button 
                 onClick={() => dispatch(logout())}
                 className="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-lg uppercase tracking-wider transition"
@@ -320,6 +320,343 @@ export default function Navbar() {
 
       </div>
       <Link href="/seeker/messages" className="hover:text-blue-300 transition">Messages</Link>
+    </nav>
+  );
+}*/
+
+/*"use client";
+
+import Link from 'next/link';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../store/slices/authSlice';
+import { useEffect, useState } from 'react';
+
+export default function Navbar() {
+  const { user, isAuthenticated } = useSelector((state) => state.auth || {});
+  const dispatch = useDispatch();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <nav className="bg-slate-900 h-16 w-full"></nav>;
+  }
+
+  return (
+    <nav className="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        
+   
+        <div className="flex items-center space-x-8">
+          <Link href="/" className="text-2xl font-extrabold text-blue-400 tracking-tighter">
+            JobPortal
+          </Link>
+          
+          <div className="hidden md:flex space-x-6 text-sm font-medium">
+            <Link href="/jobs" className="hover:text-blue-400 transition">Find Jobs</Link>
+            
+            {isAuthenticated && user?.role === 'seeker' && (
+              <>
+                <Link href="/seeker/profile" className="hover:text-blue-400 transition">Profile</Link>
+                <Link href="/seeker/messages" className="hover:text-blue-400 transition">Messages</Link>
+                <Link href="/seeker/saved-jobs" className="hover:text-blue-400 transition">Saved</Link>
+                <Link href="/seeker/applications" className="hover:text-blue-400 transition">My Apps</Link>
+              </>
+            )}
+          </div>
+        </div>
+
+
+        <div className="flex items-center space-x-4">
+          {isAuthenticated ? (
+            <div className="flex items-center space-x-4">
+              <span className="text-sm font-semibold text-blue-100 bg-slate-800 px-3 py-1 rounded-full border border-slate-700">
+                {user?.name}
+              </span>
+              <button 
+                onClick={() => dispatch(logout())}
+                className="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center space-x-3">
+              <Link href="/login" className="text-sm font-medium hover:text-blue-400 transition">Login</Link>
+              <Link href="/register" className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-5 py-2 rounded-lg transition">Register</Link>
+            </div>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
+}*/
+
+/*"use client";
+
+import Link from 'next/link';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../store/slices/authSlice';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation'; // 1. Import useRouter
+
+export default function Navbar() {
+  const { user, isAuthenticated } = useSelector((state) => state.auth || {});
+  const dispatch = useDispatch();
+  const router = useRouter(); // 2. Initialize the router
+  
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // 3. Create a handleLogout function
+  const handleLogout = () => {
+    dispatch(logout()); // Clear Redux and LocalStorage
+    router.push('/');   // Redirect to Homepage
+  };
+
+  if (!mounted) {
+    return <nav className="bg-slate-900 h-16 w-full"></nav>;
+  }
+
+  return (
+    <nav className="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        
+   
+        <div className="flex items-center space-x-8">
+          <Link href="/" className="text-2xl font-extrabold text-blue-400 tracking-tighter">
+            JobPortal
+          </Link>
+          
+          <div className="hidden md:flex space-x-6 text-sm font-medium">
+            <Link href="/jobs" className="hover:text-blue-400 transition">Find Jobs</Link>
+            
+            {isAuthenticated && user?.role === 'seeker' && (
+              <>
+                <Link href="/seeker/profile" className="hover:text-blue-400 transition">Profile</Link>
+                <Link href="/seeker/messages" className="hover:text-blue-400 transition">Messages</Link>
+                <Link href="/seeker/saved-jobs" className="hover:text-blue-400 transition">Saved</Link>
+                <Link href="/seeker/applications" className="hover:text-blue-400 transition">My Apps</Link>
+              </>
+            )}
+          </div>
+        </div>
+
+
+        <div className="flex items-center space-x-4">
+          {isAuthenticated ? (
+            <div className="flex items-center space-x-4">
+              <span className="text-sm font-semibold text-blue-100 bg-slate-800 px-3 py-1 rounded-full border border-slate-700">
+                {user?.name}
+              </span>
+      
+              <button 
+                onClick={handleLogout}
+                className="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center space-x-3">
+              <Link href="/login" className="text-sm font-medium hover:text-blue-400 transition">Login</Link>
+              <Link href="/register" className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-5 py-2 rounded-lg transition">Register</Link>
+            </div>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
+}*/
+
+/*"use client";
+
+import Link from 'next/link';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../store/slices/authSlice';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function Navbar() {
+  const { user, isAuthenticated } = useSelector((state) => state.auth || {});
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    router.push('/');
+  };
+
+  if (!mounted) return <nav className="bg-slate-900 h-16 w-full"></nav>;
+
+  return (
+    <nav className="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        
+        
+        <div className="flex items-center space-x-8">
+          <Link href="/" className="text-2xl font-extrabold text-blue-400 tracking-tighter">
+            JobPortal
+          </Link>
+          
+          <div className="hidden md:flex space-x-6 text-sm font-medium">
+            
+            
+            {(!isAuthenticated || user?.role !== 'employer') && (
+              <Link href="/jobs" className="hover:text-blue-400 transition">Find Jobs</Link>
+            )}
+            
+            
+            {isAuthenticated && user?.role === 'seeker' && (
+              <>
+                <Link href="/seeker/profile" className="hover:text-blue-400 transition">Profile</Link>
+                <Link href="/seeker/messages" className="hover:text-blue-400 transition">Messages</Link>
+                <Link href="/seeker/saved-jobs" className="hover:text-blue-400 transition">Saved</Link>
+                <Link href="/seeker/applications" className="hover:text-blue-400 transition">My Apps</Link>
+              </>
+            )}
+
+            
+            {isAuthenticated && user?.role === 'employer' && (
+              <>
+                <Link href="/employer/dashboard" className="hover:text-blue-400 transition text-blue-400">Dashboard</Link>
+                <Link href="/employer/post-job" className="hover:text-blue-400 transition">Post Job</Link>
+                
+                <Link href="/seeker/messages" className="hover:text-blue-400 transition">Inbox</Link>
+              </>
+            )}
+          </div>
+        </div>
+
+        
+        <div className="flex items-center space-x-4">
+          {isAuthenticated ? (
+            <div className="flex items-center space-x-4">
+              <span className="text-sm font-semibold text-blue-100 bg-slate-800 px-3 py-1 rounded-full border border-slate-700">
+                {user?.name}
+              </span>
+              <button 
+                onClick={handleLogout}
+                className="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center space-x-3">
+              <Link href="/login" className="text-sm font-medium hover:text-blue-400 transition">Login</Link>
+              <Link href="/register" className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-5 py-2 rounded-lg transition">Register</Link>
+            </div>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
+}*/
+
+
+
+"use client";
+
+import Link from 'next/link';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../store/slices/authSlice';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function Navbar() {
+  const { user, isAuthenticated } = useSelector((state) => state.auth || {});
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    router.push('/');
+  };
+
+  if (!mounted) return <nav className="bg-slate-900 h-16 w-full"></nav>;
+
+  return (
+    <nav className="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        
+        {/* LEFT SIDE: Logo and Navigation Links */}
+        <div className="flex items-center space-x-8">
+          <Link href="/" className="text-2xl font-extrabold text-blue-400 tracking-tighter">
+            JobPortal
+          </Link>
+          
+          <div className="hidden md:flex space-x-6 text-sm font-medium">
+            
+            {/* 1. Only show "Find Jobs" if NOT an employer */}
+            {(!isAuthenticated || user?.role !== 'employer') && (
+              <Link href="/jobs" className="hover:text-blue-400 transition">Find Jobs</Link>
+            )}
+            
+            {/* 2. SEEKER SPECIFIC LINKS */}
+            {isAuthenticated && user?.role === 'seeker' && (
+              <>
+                <Link href="/seeker/profile" className="hover:text-blue-400 transition">Profile</Link>
+                <Link href="/seeker/messages" className="hover:text-blue-400 transition">Messages</Link>
+                <Link href="/seeker/saved-jobs" className="hover:text-blue-400 transition">Saved</Link>
+                <Link href="/seeker/applications" className="hover:text-blue-400 transition">My Apps</Link>
+              </>
+            )}
+
+            {/* 3. EMPLOYER SPECIFIC LINKS (Updated with Performance) */}
+            {isAuthenticated && user?.role === 'employer' && (
+              <>
+                <Link href="/employer/dashboard" className="hover:text-blue-400 transition">Dashboard</Link>
+                <Link href="/employer/metrics" className="hover:text-blue-400 transition">Performance</Link>
+                <Link href="/employer/post-job" className="hover:text-blue-400 transition">Post Job</Link>
+                <Link href="/seeker/messages" className="hover:text-blue-400 transition">Inbox</Link>
+              </>
+            )}
+
+            {/* 4. ADMIN SPECIFIC LINKS (Optional but recommended) */}
+            {isAuthenticated && user?.role === 'admin' && (
+               <Link href="/admin/dashboard" className="hover:text-blue-400 transition">Admin Panel</Link>
+            )}
+          </div>
+        </div>
+
+        {/* RIGHT SIDE: User Information and Auth Actions */}
+        <div className="flex items-center space-x-4">
+          {isAuthenticated ? (
+            <div className="flex items-center space-x-4">
+              <span className="text-sm font-semibold text-blue-100 bg-slate-800 px-3 py-1 rounded-full border border-slate-700">
+                {user?.name}
+              </span>
+              <button 
+                onClick={handleLogout}
+                className="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center space-x-3">
+              <Link href="/login" className="text-sm font-medium hover:text-blue-400 transition">Login</Link>
+              <Link href="/register" className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-5 py-2 rounded-lg transition">Register</Link>
+            </div>
+          )}
+        </div>
+      </div>
     </nav>
   );
 }

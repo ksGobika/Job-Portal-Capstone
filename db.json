@@ -15,12 +15,12 @@
           "Next.js",
           "Tailwind CSS"
         ],
-        "education": "bsc",
+        "education": "MCA",
         "experience": "2 years at TechCorp"
       },
       "savedJobs": [
-        "j2",
         null,
+        "j2",
         "j1"
       ]
     },
@@ -80,34 +80,18 @@
       "postedAt": "2023-10-01T10:00:00Z",
       "status": "approved",
       "views": 150
-    },
-    {
-      "id": "j2",
-      "employerId": "u2",
-      "title": "UI Designer",
-      "description": "Create stunning user interfaces using Figma.",
-      "location": "New York",
-      "jobType": "Contract",
-      "industry": "Design",
-      "experienceLevel": "Intermediate",
-      "salaryRange": "50k - 70k",
-      "requiredSkills": [
-        "Figma",
-        "Adobe XD"
-      ],
-      "deadline": "2023-11-15",
-      "postedAt": "2023-10-05T08:30:00Z",
-      "status": "approved",
-      "views": 45
     }
   ],
   "applications": [
     {
+      "jobId": null,
+      "jobTitle": "UI Designer",
       "seekerId": "u1",
       "seekerName": "John Seeker",
-      "status": "applied",
-      "appliedAt": "2026-04-16T15:15:23.226Z",
-      "id": "90XwPYlS1Jc"
+      "employerId": "u2",
+      "status": "shortlisted",
+      "appliedAt": "2026-04-17T09:02:29.187Z",
+      "id": "QuJr6qdR8YQ"
     }
   ],
   "messages": [
@@ -126,6 +110,22 @@
       "content": "I want the extra details about the job",
       "timestamp": "2026-04-16T16:28:28.551Z",
       "id": "LkR3oqLBPPQ"
+    },
+    {
+      "senderId": "u1",
+      "senderName": "John Seeker",
+      "receiverId": "u2",
+      "content": "hiii",
+      "timestamp": "2026-04-17T10:40:41.306Z",
+      "id": "aZuYnhv7Tvs"
+    },
+    {
+      "senderId": "u2",
+      "senderName": "Global Tech Solutions",
+      "receiverId": "u1",
+      "content": "yes",
+      "timestamp": "2026-04-17T10:42:11.857Z",
+      "id": "htTjua1sKjI"
     }
   ],
   "notifications": [

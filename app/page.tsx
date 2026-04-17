@@ -85,20 +85,45 @@ export default function HomePage() {
       </div>
 
       <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
-        <div className="p-6 bg-white shadow rounded-xl">
-          <h3 className="text-xl font-bold mb-2">800k+ Jobs</h3>
+        <div className="p-6 bg-blue shadow rounded-xl">
+          <h3 className="text-xl font-bold mb-2 text-gray-900">800k+ Jobs</h3>
           <p className="text-gray-500">Explore roles across all industries.</p>
         </div>
-        <div className="p-6 bg-white shadow rounded-xl">
-          <h3 className="text-xl font-bold mb-2">Verified Companies</h3>
+        <div className="p-6 bg-blue shadow rounded-xl">
+          <h3 className="text-xl font-bold mb-2 text-gray-900">Verified Companies</h3>
           <p className="text-gray-500">Apply to trusted organizations.</p>
         </div>
-        <div className="p-6 bg-white shadow rounded-xl">
-          <h3 className="text-xl font-bold mb-2">Instant Alerts</h3>
+        <div className="p-6 bg-blue shadow rounded-xl">
+          <h3 className="text-xl font-bold mb-2 text-gray-900">Instant Alerts</h3>
           <p className="text-gray-500">Get notified about new openings.</p>
         </div>
       </div>
     </div>
+
+    /*<div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
+  
+
+  <div className="p-8 bg-white shadow-xl rounded-2xl border border-gray-100 flex flex-col items-center">
+    <div className="text-4xl mb-4">💼</div>
+    <h3 className="text-2xl font-bold mb-2 text-gray-900">800k+ Jobs</h3>
+    <p className="text-gray-600 font-medium">Explore roles across all industries and locations.</p>
+  </div>
+
+
+  <div className="p-8 bg-white shadow-xl rounded-2xl border border-gray-100 flex flex-col items-center">
+    <div className="text-4xl mb-4">🏢</div>
+    <h3 className="text-2xl font-bold mb-2 text-gray-900">Verified Companies</h3>
+    <p className="text-gray-600 font-medium">Apply to trusted organizations and top startups.</p>
+  </div>
+
+
+  <div className="p-8 bg-white shadow-xl rounded-2xl border border-gray-100 flex flex-col items-center">
+    <div className="text-4xl mb-4">🔔</div>
+    <h3 className="text-2xl font-bold mb-2 text-gray-900">Instant Alerts</h3>
+    <p className="text-gray-600 font-medium">Get notified immediately about new openings.</p>
+  </div>
+
+</div>*/
   );
 }
 

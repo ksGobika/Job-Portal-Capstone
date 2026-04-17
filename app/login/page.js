@@ -42,13 +42,13 @@ export default function LoginPage() {
         
         <div className="mb-4">
           <label className="block text-gray-700">Email Address</label>
-          <input type="email" required className="w-full p-2 border rounded mt-1"
+          <input type="email" required className="w-full p-2 border rounded mt-1 text-gray-900"
             onChange={(e) => setEmail(e.target.value)} />
         </div>
 
         <div className="mb-6">
           <label className="block text-gray-700">Password</label>
-          <input type="password" required className="w-full p-2 border rounded mt-1"
+          <input type="password" required className="w-full p-2 border rounded mt-1 text-gray-900"
             onChange={(e) => setPassword(e.target.value)} />
         </div>
 
