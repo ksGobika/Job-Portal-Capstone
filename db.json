@@ -1,0 +1,170 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "name": "John Seeker",
+      "email": "seeker@example.com",
+      "password": "password123",
+      "role": "seeker",
+      "profile": {
+        "title": "Frontend Developer",
+        "bio": "Passionate frontend developer focused on building scalable web apps.",
+        "skills": [
+          "React",
+          "Redux",
+          "Next.js",
+          "Tailwind CSS"
+        ],
+        "education": "bsc",
+        "experience": "2 years at TechCorp"
+      },
+      "savedJobs": [
+        "j2",
+        null,
+        "j1"
+      ]
+    },
+    {
+      "id": "u2",
+      "name": "Global Tech Solutions",
+      "email": "hr@globaltech.com",
+      "password": "password123",
+      "role": "employer",
+      "company": {
+        "name": "Global Tech Solutions",
+        "description": "A leading software consultancy firm.",
+        "website": "https://globaltech.com",
+        "location": "New York, USA",
+        "logo": "/images/logos/globaltech.png"
+      }
+    },
+    {
+      "id": "u3",
+      "name": "Admin User",
+      "email": "admin@jobportal.com",
+      "password": "adminpassword",
+      "role": "admin"
+    },
+    {
+      "name": "sandhiya",
+      "email": "sandy@gmail.com",
+      "password": "1234",
+      "role": "seeker",
+      "profile": {
+        "title": "",
+        "skills": [],
+        "bio": ""
+      },
+      "company": null,
+      "savedJobs": [],
+      "id": "h-EthEcefO8"
+    }
+  ],
+  "jobs": [
+    {
+      "id": "j1",
+      "employerId": "u2",
+      "title": "Senior React Developer",
+      "description": "We are looking for an expert in React and Redux Toolkit.",
+      "location": "Remote",
+      "jobType": "Full-time",
+      "industry": "IT",
+      "experienceLevel": "Senior",
+      "salaryRange": "80k - 120k",
+      "requiredSkills": [
+        "React",
+        "Redux",
+        "TypeScript"
+      ],
+      "deadline": "2024-12-31",
+      "postedAt": "2023-10-01T10:00:00Z",
+      "status": "approved",
+      "views": 150
+    },
+    {
+      "id": "j2",
+      "employerId": "u2",
+      "title": "UI Designer",
+      "description": "Create stunning user interfaces using Figma.",
+      "location": "New York",
+      "jobType": "Contract",
+      "industry": "Design",
+      "experienceLevel": "Intermediate",
+      "salaryRange": "50k - 70k",
+      "requiredSkills": [
+        "Figma",
+        "Adobe XD"
+      ],
+      "deadline": "2023-11-15",
+      "postedAt": "2023-10-05T08:30:00Z",
+      "status": "approved",
+      "views": 45
+    }
+  ],
+  "applications": [
+    {
+      "seekerId": "u1",
+      "seekerName": "John Seeker",
+      "status": "applied",
+      "appliedAt": "2026-04-16T15:15:23.226Z",
+      "id": "90XwPYlS1Jc"
+    }
+  ],
+  "messages": [
+    {
+      "id": "m1",
+      "senderId": "u1",
+      "receiverId": "u2",
+      "senderName": "John Seeker",
+      "content": "Hello, I wanted to follow up on my application.",
+      "timestamp": "2023-10-25T10:00:00Z"
+    },
+    {
+      "senderId": "u1",
+      "senderName": "John Seeker",
+      "receiverId": "u2",
+      "content": "I want the extra details about the job",
+      "timestamp": "2026-04-16T16:28:28.551Z",
+      "id": "LkR3oqLBPPQ"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "n1",
+      "userId": "u1",
+      "message": "Your application for Senior React Developer has been shortlisted!",
+      "isRead": false,
+      "type": "status_update",
+      "createdAt": "2023-10-03T09:05:00Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "r1",
+      "employerId": "u2",
+      "seekerId": "u1",
+      "rating": 5,
+      "comment": "Great interview process and very professional HR team.",
+      "createdAt": "2023-10-10"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Engineering"
+    },
+    {
+      "id": "2",
+      "name": "Design"
+    },
+    {
+      "id": "3",
+      "name": "Marketing"
+    },
+    {
+      "id": "4",
+      "name": "Sales"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
