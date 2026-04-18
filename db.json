@@ -21,7 +21,8 @@
       "savedJobs": [
         null,
         "j2",
-        "j1"
+        "j1",
+        "rdKYh3UIVcA"
       ]
     },
     {
@@ -58,6 +59,19 @@
       "company": null,
       "savedJobs": [],
       "id": "h-EthEcefO8"
+    },
+    {
+      "name": "World Tech",
+      "email": "world@gmail.com",
+      "password": "world123",
+      "role": "employer",
+      "profile": null,
+      "company": {
+        "name": "World Tech",
+        "description": ""
+      },
+      "savedJobs": [],
+      "id": "zgyIjFJ83OY"
     }
   ],
   "jobs": [
@@ -79,7 +93,102 @@
       "deadline": "2024-12-31",
       "postedAt": "2023-10-01T10:00:00Z",
       "status": "approved",
-      "views": 150
+      "views": 152
+    },
+    {
+      "employerId": "u2",
+      "title": "UI Designer",
+      "description": "Passionate is most important",
+      "location": "Bengaluru",
+      "jobType": "Full-time",
+      "industry": "Design",
+      "experienceLevel": "Intermediate",
+      "salaryRange": "20k-40k",
+      "requiredSkills": [
+        "Design Skills"
+      ],
+      "deadline": "2026-04-17",
+      "postedAt": "2026-04-17T15:07:00.402Z",
+      "status": "approved",
+      "views": 0,
+      "id": "MRCPAcm-8QE"
+    },
+    {
+      "employerId": "u2",
+      "title": "Data Analyst",
+      "description": "Clear Analytic Skills",
+      "location": "Coimbatore",
+      "jobType": "Full-time",
+      "industry": "Analysis",
+      "experienceLevel": "Senior",
+      "salaryRange": "80k - 100k",
+      "requiredSkills": [
+        "Power BI",
+        "Tableau"
+      ],
+      "deadline": "2026-04-17",
+      "postedAt": "2026-04-17T15:46:14.553Z",
+      "status": "approved",
+      "views": 0,
+      "id": "klPy51ef2_Q"
+    },
+    {
+      "employerId": "u2",
+      "companyName": "Global Tech Solutions",
+      "title": "Web Development",
+      "description": "Passionate in work and good leadership ",
+      "location": "Remote",
+      "jobType": "Full-time",
+      "industry": "IT",
+      "experienceLevel": "Intermediate",
+      "salaryRange": "40k - 50k",
+      "requiredSkills": [
+        "CSS",
+        "JavaScript and HTML"
+      ],
+      "deadline": "2026-04-17",
+      "postedAt": "2026-04-17T15:57:50.854Z",
+      "status": "pending",
+      "views": 1,
+      "id": "V6YQt67q6DY"
+    },
+    {
+      "employerId": "zgyIjFJ83OY",
+      "companyName": "World Tech",
+      "title": "Software Developer",
+      "description": "Give the full contribution to the team work or projects",
+      "location": "Remote",
+      "jobType": "Part-time",
+      "industry": "IT",
+      "experienceLevel": "Intermediate",
+      "salaryRange": "30k - 50k",
+      "requiredSkills": [
+        "Logical Thinking"
+      ],
+      "deadline": "2026-04-18",
+      "postedAt": "2026-04-18T07:03:43.373Z",
+      "status": "approved",
+      "views": 1,
+      "id": "rdKYh3UIVcA"
+    },
+    {
+      "employerId": "zgyIjFJ83OY",
+      "companyName": "World Tech",
+      "title": "Digital Marketiing Specialist",
+      "description": "Plans, executes, and optimizes online marketing campaigns across various channels",
+      "location": "Bangalore",
+      "jobType": "Full-time",
+      "industry": "Marketing",
+      "experienceLevel": "Senior",
+      "salaryRange": "60k - 90k",
+      "requiredSkills": [
+        "Analytic skills"
+      ],
+      "deadline": "2026-04-18",
+      "postedAt": "2026-04-18T07:12:48.561Z",
+      "status": "approved",
+      "views": 2,
+      "id": "7edroK0_03A"
     }
   ],
   "applications": [
@@ -89,9 +198,29 @@
       "seekerId": "u1",
       "seekerName": "John Seeker",
       "employerId": "u2",
-      "status": "shortlisted",
+      "status": "rejected",
       "appliedAt": "2026-04-17T09:02:29.187Z",
       "id": "QuJr6qdR8YQ"
+    },
+    {
+      "jobId": "rdKYh3UIVcA",
+      "jobTitle": "Software Developer",
+      "seekerId": "u1",
+      "seekerName": "John Seeker",
+      "employerId": "zgyIjFJ83OY",
+      "status": "applied",
+      "appliedAt": "2026-04-18T07:06:05.154Z",
+      "id": "BI2CuEdAF8I"
+    },
+    {
+      "jobId": "klPy51ef2_Q",
+      "jobTitle": "Data Analyst",
+      "seekerId": "u1",
+      "seekerName": "John Seeker",
+      "employerId": "u2",
+      "status": "shortlisted",
+      "appliedAt": "2026-04-18T12:14:37.020Z",
+      "id": "XfEJ3pu_hwU"
     }
   ],
   "messages": [
@@ -126,6 +255,30 @@
       "content": "yes",
       "timestamp": "2026-04-17T10:42:11.857Z",
       "id": "htTjua1sKjI"
+    },
+    {
+      "senderId": "u1",
+      "senderName": "John Seeker",
+      "receiverId": "zgyIjFJ83OY",
+      "content": "Hii sir",
+      "timestamp": "2026-04-18T07:05:41.495Z",
+      "id": "TYEXHdPA-SE"
+    },
+    {
+      "senderId": "zgyIjFJ83OY",
+      "senderName": "World Tech",
+      "receiverId": "u1",
+      "content": "Hii john, I am the HR of the company World Tech",
+      "timestamp": "2026-04-18T07:08:28.155Z",
+      "id": "48sKzqltK30"
+    },
+    {
+      "senderId": "u1",
+      "senderName": "John Seeker",
+      "receiverId": "zgyIjFJ83OY",
+      "content": "I am interested to work in our company",
+      "timestamp": "2026-04-18T07:14:45.707Z",
+      "id": "4WlXs043wAg"
     }
   ],
   "notifications": [
@@ -164,6 +317,21 @@
     {
       "id": "4",
       "name": "Sales"
+    }
+  ],
+  "announcements": [
+    {
+      "message": "Hii I am Admin of this job portal",
+      "date": "2026-04-18T15:38:47.858Z",
+      "active": true,
+      "id": "F5bhtzQfG8o"
+    }
+  ],
+  "faqs": [
+    {
+      "id": "1",
+      "question": "How to post a job?",
+      "answer": "Register as an employer and click Post Job."
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

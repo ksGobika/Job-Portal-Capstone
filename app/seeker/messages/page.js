@@ -1,62 +1,3 @@
-/*"use client";
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import ChatBox from '@/components/ChatBox';
-
-export default function SeekerMessages() {
-  const { user } = useSelector((state) => state.auth);
-  const [contacts, setContacts] = useState([]);
-  const [selectedContact, setSelectedContact] = useState(null);
-
-  useEffect(() => {
-    // Logic: Find everyone who has messaged the seeker or vice versa
-    const fetchContacts = async () => {
-      const res = await fetch(`http://localhost:5000/messages`);
-      const allMsgs = await res.json();
-      
-      const involvedIds = new Set();
-      allMsgs.forEach(m => {
-        if (m.senderId === user.id) involvedIds.add(m.receiverId);
-        if (m.receiverId === user.id) involvedIds.add(m.senderId);
-      });
-
-      const userRes = await fetch(`http://localhost:5000/users`);
-      const allUsers = await userRes.json();
-      const contactList = allUsers.filter(u => involvedIds.has(u.id));
-      setContacts(contactList);
-    };
-    if (user) fetchContacts();
-  }, [user]);
-
-  return (
-    <div className="max-w-6xl mx-auto p-6 flex gap-6">
-      <div className="w-1/3 bg-white border rounded-xl p-4 shadow-sm">
-        <h2 className="text-xl font-bold mb-4 border-b pb-2">Messages</h2>
-        <div className="space-y-2">
-          {contacts.map(c => (
-            <button key={c.id} onClick={() => setSelectedContact(c)} 
-              className={`w-full text-left p-3 rounded-lg transition ${selectedContact?.id === c.id ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100'}`}>
-              <p className="font-bold">{c.name}</p>
-              <p className="text-xs text-gray-500 uppercase">{c.role}</p>
-            </button>
-          ))}
-          {contacts.length === 0 && <p className="text-gray-400">No conversations yet.</p>}
-        </div>
-      </div>
-      
-      <div className="flex-1">
-        {selectedContact ? (
-          <ChatBox currentUser={user} targetUser={selectedContact} />
-        ) : (
-          <div className="h-full flex items-center justify-center border-2 border-dashed border-gray-200 rounded-xl text-gray-400">
-            Select a contact to start messaging
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}*/
-
 "use client";
 import { useState, useEffect, Suspense } from 'react';
 import { useSelector } from 'react-redux';
@@ -75,7 +16,7 @@ function MessagesContent() {
   useEffect(() => {
     const fetchContacts = async () => {
       if (!user) return;
-      const res = await fetch(`http://localhost:5000/messages`);
+      const res = await fetch(`http://localhost:5001/messages`);
       const allMsgs = await res.json();
       const involvedIds = new Set();
       allMsgs.forEach(m => {
@@ -83,7 +24,7 @@ function MessagesContent() {
         if (m.receiverId === user.id) involvedIds.add(m.senderId);
       });
 
-      const userRes = await fetch(`http://localhost:5000/users`);
+      const userRes = await fetch(`http://localhost:5001/users`);
       const allUsers = await userRes.json();
       let contactList = allUsers.filter(u => involvedIds.has(u.id));
 

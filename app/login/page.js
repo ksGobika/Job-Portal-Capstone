@@ -15,7 +15,7 @@ export default function LoginPage() {
     e.preventDefault();
     try {
       // Fetch user by email from json-server
-      const res = await fetch(`http://localhost:5000/users?email=${email}`);
+      const res = await fetch(`http://localhost:5001/users?email=${email}`);
       const data = await res.json();
       const user = data[0];
 

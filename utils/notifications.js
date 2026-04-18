@@ -7,7 +7,7 @@ export const sendNotification = async (userId, message, type) => {
     createdAt: new Date().toISOString()
   };
 
-  await fetch('http://localhost:5000/notifications', {
+  await fetch('http://localhost:5001/notifications', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(notification)

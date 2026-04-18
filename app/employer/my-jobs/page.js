@@ -12,7 +12,7 @@ export default function ManageJobs() {
     if (user) {
       try {
         // Fetch jobs where employerId matches the logged-in user's ID
-        const res = await fetch(`http://localhost:5000/jobs?employerId=${user.id}`);
+        const res = await fetch(`http://localhost:5001/jobs?employerId=${user.id}`);
         const data = await res.json();
         setJobs(data);
       } catch (error) {

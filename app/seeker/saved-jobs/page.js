@@ -14,7 +14,7 @@ export default function SavedJobsPage() {
       if (isAuthenticated && user?.savedJobs?.length > 0) {
         try {
           // Fetch all jobs and filter those whose ID is in the user's savedJobs list
-          const res = await fetch('http://localhost:5000/jobs?status=approved');
+          const res = await fetch('http://localhost:5001/jobs?status=approved');
           const allJobs = await res.json();
           
           const filtered = allJobs.filter(job => user.savedJobs.includes(job.id));

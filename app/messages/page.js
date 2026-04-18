@@ -9,7 +9,7 @@ export default function MessagingPage() {
 
   useEffect(() => {
     // Fetch messages where user is sender OR receiver
-    fetch(`http://localhost:5000/messages`)
+    fetch(`http://localhost:5001/messages`)
       .then(res => res.json())
       .then(data => {
         const filtered = data.filter(m => m.senderId === user.id || m.receiverId === user.id);
@@ -25,7 +25,7 @@ export default function MessagingPage() {
       timestamp: new Date().toISOString()
     };
 
-    const res = await fetch('http://localhost:5000/messages', {
+    const res = await fetch('http://localhost:5001/messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(msgData)

@@ -1,32 +1,3 @@
-/*import Link from 'next/link';
-
-export default function JobCard({ job }) {
-  return (
-    <div className="border p-5 rounded-lg shadow-sm hover:shadow-md transition bg-white">
-      <div className="flex justify-between items-start">
-        <div>
-          <h3 className="text-xl font-bold text-blue-700">{job.title}</h3>
-          <p className="text-gray-600 font-medium">{job.location} | {job.jobType}</p>
-        </div>
-        <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">
-          {job.salaryRange}
-        </span>
-      </div>
-      <p className="mt-2 text-gray-500 line-clamp-2">{job.description}</p>
-      <div className="mt-4 flex gap-2">
-        {job.requiredSkills.slice(0, 3).map(skill => (
-          <span key={skill} className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
-            {skill}
-          </span>
-        ))}
-      </div>
-      <Link href={`/jobs/${job.id}`} className="mt-4 block text-center bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-        View Details
-      </Link>
-    </div>
-  );
-}*/
-
 "use client"; // Required for click handlers and Redux
 
 import Link from 'next/link';
@@ -50,7 +21,7 @@ export default function JobCard({ job }) {
       }
       
       // 2. Check if applied (fetch from applications endpoint)
-      fetch(`http://localhost:5000/applications?jobId=${job.id}&seekerId=${user.id}`)
+      fetch(`http://localhost:5001/applications?jobId=${job.id}&seekerId=${user.id}`)
         .then(res => res.json())
         .then(data => {
           if (data.length > 0) setIsApplied(true);
@@ -67,7 +38,7 @@ export default function JobCard({ job }) {
       ? currentSaved.filter(id => id !== job.id) 
       : [...currentSaved, job.id];
 
-    const res = await fetch(`http://localhost:5000/users/${user.id}`, {
+    const res = await fetch(`http://localhost:5001/users/${user.id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ savedJobs: updatedSaved })
@@ -94,7 +65,7 @@ export default function JobCard({ job }) {
       appliedAt: new Date().toISOString()
     };
 
-    const res = await fetch('http://localhost:5000/applications', {
+    const res = await fetch('http://localhost:5001/applications', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(applicationData)
