@@ -493,7 +493,7 @@ function MessagesContent() {
 
     const fetchContacts = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/messages`);
+        const res = await fetch(`http://localhost:5001/messages`);
         if (!res.ok) return;
         const allMsgs = await res.json();
         
@@ -504,7 +504,7 @@ function MessagesContent() {
           if (m.receiverId === user?.id) involvedIds.add(m.senderId);
         });
 
-        const userRes = await fetch(`http://localhost:5000/users`);
+        const userRes = await fetch(`http://localhost:5001/users`);
         const allUsers = await userRes.json();
         let contactList = allUsers.filter(u => involvedIds.has(u.id));
 
