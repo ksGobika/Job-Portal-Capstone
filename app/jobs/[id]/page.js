@@ -25,12 +25,12 @@ export default function JobDetails({ params }) {
 
     const fetchDetails = async () => {
       try {
-        const res = await fetch(`http://localhost:5001/jobs/${id}`);
+        const res = await fetch(`https://job-portal-api-zi92.onrender.com/jobs/${id}`);
         const data = await res.json();
         setJob(data);
 
         if (isAuthenticated && user) {
-          const appRes = await fetch(`http://localhost:5001/applications?jobId=${id}&seekerId=${user.id}`);
+          const appRes = await fetch(`https://job-portal-api-zi92.onrender.com/applications?jobId=${id}&seekerId=${user.id}`);
           const appData = await appRes.json();
           if (appData.length > 0) {
             setApplied(true);
@@ -60,7 +60,7 @@ export default function JobDetails({ params }) {
       appliedAt: new Date().toISOString()
     };
 
-    const res = await fetch('http://localhost:5001/applications', {
+    const res = await fetch('https://job-portal-api-zi92.onrender.com/applications', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(applicationData)
@@ -77,7 +77,7 @@ export default function JobDetails({ params }) {
 
   const handleWithdraw = async () => {
     if (window.confirm("Are you sure?")) {
-      await fetch(`http://localhost:5001/applications/${applicationId}`, { method: 'DELETE' });
+      await fetch(`https://job-portal-api-zi92.onrender.com/applications/${applicationId}`, { method: 'DELETE' });
       setApplied(false);
       setApplicationId(null);
     }

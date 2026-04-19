@@ -25,7 +25,7 @@ export default function RegisterPage() {
     };
 
     try {
-      const res = await fetch('http://localhost:5001/users', {
+      const res = await fetch('https://job-portal-api-zi92.onrender.com/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newUser)

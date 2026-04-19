@@ -9,7 +9,7 @@ export default function ReviewSection({ employerId }) {
   const [comment, setComment] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:5001/reviews?employerId=${employerId}`)
+    fetch(`https://job-portal-api-zi92.onrender.com/reviews?employerId=${employerId}`)
       .then(res => res.json())
       .then(data => setReviews(data));
   }, [employerId]);
@@ -27,7 +27,7 @@ export default function ReviewSection({ employerId }) {
       createdAt: new Date().toISOString().split('T')[0]
     };
 
-    const res = await fetch('http://localhost:5001/reviews', {
+    const res = await fetch('https://job-portal-api-zi92.onrender.com/reviews', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newReview)

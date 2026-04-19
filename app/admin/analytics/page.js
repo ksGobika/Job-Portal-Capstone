@@ -9,9 +9,9 @@ export default function AdminAnalytics() {
     const fetchAnalytics = async () => {
       try {
         const [uRes, jRes, aRes] = await Promise.all([
-          fetch('http://localhost:5001/users'),
-          fetch('http://localhost:5001/jobs'),
-          fetch('http://localhost:5001/applications')
+          fetch('https://job-portal-api-zi92.onrender.com/users'),
+          fetch('https://job-portal-api-zi92.onrender.com/jobs'),
+          fetch('https://job-portal-api-zi92.onrender.com /applications')
         ]);
 
         const users = await uRes.json();

@@ -6,13 +6,13 @@ export default function AdminJobsApproval() {
 
   useEffect(() => {
     // Fetch only jobs that are 'pending'
-    fetch('http://localhost:5001/jobs?status=pending')
+    fetch('https://job-portal-api-zi92.onrender.com/jobs?status=pending')
       .then(res => res.json())
       .then(data => setPendingJobs(data));
   }, []);
 
   const handleApprove = async (id) => {
-    await fetch(`http://localhost:5001/jobs/${id}`, {
+    await fetch(`https://job-portal-api-zi92.onrender.com/jobs/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status: 'approved' }) // Update status to approved

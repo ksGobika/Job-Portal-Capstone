@@ -12,7 +12,7 @@ export default function ManageJobs() {
     if (user) {
       try {
         // Fetch jobs where employerId matches the logged-in user's ID
-        const res = await fetch(`http://localhost:5001/jobs?employerId=${user.id}`);
+        const res = await fetch(`https://job-portal-api-zi92.onrender.com/jobs?employerId=${user.id}`);
         const data = await res.json();
         setJobs(data);
       } catch (error) {
@@ -29,7 +29,7 @@ export default function ManageJobs() {
 
   const handleDelete = async (jobId) => {
     if (window.confirm("Are you sure you want to delete this job listing?")) {
-      await fetch(`http://localhost:5000/jobs/${jobId}`, { method: 'DELETE' });
+      await fetch(`https://job-portal-api-zi92.onrender.com/jobs/${jobId}`, { method: 'DELETE' });
       // Refresh the list after deletion
       setJobs(jobs.filter(job => job.id !== jobId));
       alert("Job deleted successfully.");

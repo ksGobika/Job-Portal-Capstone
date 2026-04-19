@@ -88,7 +88,7 @@ export default function ChatBox({ currentUser, targetUser }) {
     if (!currentUser?.id || !targetUser?.id) return;
 
     try {
-      const res = await fetch(`http://localhost:5001/messages`);
+      const res = await fetch(`https://job-portal-api-zi92.onrender.com/messages`);
       if (!res.ok) return;
       
       const data = await res.json();
@@ -130,7 +130,7 @@ export default function ChatBox({ currentUser, targetUser }) {
     };
 
     try {
-      await fetch('http://localhost:5001/messages', {
+      await fetch('https://job-portal-api-zi92.onrender.com/messages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(msgData)

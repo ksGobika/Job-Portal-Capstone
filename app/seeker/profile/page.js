@@ -59,7 +59,7 @@ export default function SeekerProfile() {
 
     try {
       // 4. Update the database (JSON Server)
-      const res = await fetch(`http://localhost:5001/users/${user.id}`, {
+      const res = await fetch(`https://job-portal-api-zi92.onrender.com/users/${user.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedData)

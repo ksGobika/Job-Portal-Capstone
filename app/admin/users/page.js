@@ -5,14 +5,14 @@ export default function AdminUsers() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5001/users')
+    fetch('https://job-portal-api-zi92.onrender.com/users')
       .then(res => res.json())
       .then(data => setUsers(data));
   }, []);
 
   const deleteUser = async (id) => {
     if (window.confirm("Delete this user permanently?")) {
-      await fetch(`http://localhost:5001/users/${id}`, { method: 'DELETE' });
+      await fetch(`https://job-portal-api-zi92.onrender.com/users/${id}`, { method: 'DELETE' });
       setUsers(users.filter(u => u.id !== id));
     }
   };

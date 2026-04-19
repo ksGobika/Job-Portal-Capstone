@@ -6,12 +6,12 @@ export default function ContentManagement() {
   const [newFaq, setNewFaq] = useState({ question: '', answer: '' });
 
   useEffect(() => {
-    fetch('http://localhost:5001/faqs').then(res => res.json()).then(data => setFaqs(data));
+    fetch('https://job-portal-api-zi92.onrender.com/faqs').then(res => res.json()).then(data => setFaqs(data));
   }, []);
 
   const addFaq = async (e) => {
     e.preventDefault();
-    const res = await fetch('http://localhost:5001/faqs', {
+    const res = await fetch('https://job-portal-api-zi92.onrender.com/faqs', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newFaq)
@@ -24,7 +24,7 @@ export default function ContentManagement() {
   };
 
   const deleteFaq = async (id) => {
-    await fetch(`http://localhost:5001/faqs/${id}`, { method: 'DELETE' });
+    await fetch(`https://job-portal-api-zi92.onrender.com/faqs/${id}`, { method: 'DELETE' });
     setFaqs(faqs.filter(f => f.id !== id));
   };
 

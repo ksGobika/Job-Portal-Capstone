@@ -7,14 +7,14 @@ export default function AdminBroadcast() {
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/announcements?_limit=5&_sort=id&_order=desc')
+    fetch('https://job-portal-api-zi92.onrender.com/announcements?_limit=5&_sort=id&_order=desc')
       .then(res => res.json()).then(data => setHistory(data));
   }, []);
 
   const sendBroadcast = async (e) => {
     e.preventDefault();
     const announcement = { message, date: new Date().toISOString(), active: true };
-    const res = await fetch('http://localhost:5001/announcements', {
+    const res = await fetch('https://job-portal-api-zi92.onrender.com/announcements', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(announcement)

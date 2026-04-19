@@ -11,8 +11,8 @@ export default function EmployerDashboard() {
     if (user) {
       const fetchData = async () => {
         const [jobsRes, appsRes] = await Promise.all([
-          fetch(`http://localhost:5001/jobs?employerId=${user.id}`),
-          fetch(`http://localhost:5001/applications?employerId=${user.id}`)
+          fetch(`https://job-portal-api-zi92.onrender.com/jobs?employerId=${user.id}`),
+          fetch(`https://job-portal-api-zi92.onrender.com/applications?employerId=${user.id}`)
         ]);
         const jobs = await jobsRes.json();
         const apps = await appsRes.json();

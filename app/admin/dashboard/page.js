@@ -8,9 +8,9 @@ export default function AdminDashboard() {
   useEffect(() => {
     const fetchStats = async () => {
       const [u, j, a] = await Promise.all([
-        fetch('http://localhost:5001/users').then(res => res.json()),
-        fetch('http://localhost:5001/jobs').then(res => res.json()),
-        fetch('http://localhost:5001/applications').then(res => res.json())
+        fetch('https://job-portal-api-zi92.onrender.com/users').then(res => res.json()),
+        fetch('https://job-portal-api-zi92.onrender.com/jobs').then(res => res.json()),
+        fetch('https://job-portal-api-zi92.onrender.com/applications').then(res => res.json())
       ]);
       setStats({
         users: u.length,

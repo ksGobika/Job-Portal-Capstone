@@ -47,7 +47,7 @@ export default function PostJobPage() {
     };
 
     try {
-      const res = await fetch('http://localhost:5001/jobs', {
+      const res = await fetch('https://job-portal-api-zi92.onrender.com/jobs', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newJob)

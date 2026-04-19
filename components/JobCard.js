@@ -21,7 +21,7 @@ export default function JobCard({ job }) {
       }
       
       // 2. Check if applied (fetch from applications endpoint)
-      fetch(`http://localhost:5001/applications?jobId=${job.id}&seekerId=${user.id}`)
+      fetch(`https://job-portal-api-zi92.onrender.com/applications?jobId=${job.id}&seekerId=${user.id}`)
         .then(res => res.json())
         .then(data => {
           if (data.length > 0) setIsApplied(true);
@@ -38,7 +38,7 @@ export default function JobCard({ job }) {
       ? currentSaved.filter(id => id !== job.id) 
       : [...currentSaved, job.id];
 
-    const res = await fetch(`http://localhost:5001/users/${user.id}`, {
+    const res = await fetch(`https://job-portal-api-zi92.onrender.com/users/${user.id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ savedJobs: updatedSaved })
@@ -65,7 +65,7 @@ export default function JobCard({ job }) {
       appliedAt: new Date().toISOString()
     };
 
-    const res = await fetch('http://localhost:5001/applications', {
+    const res = await fetch('https://job-portal-api-zi92.onrender.com/applications', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(applicationData)

@@ -13,7 +13,7 @@ export default function JobSearchPage() {
     setLoading(true);
     try {
       // 1. Start with the base URL (only approved jobs)
-      let url = `http://localhost:5001/jobs?status=approved`;
+      let url = `https://job-portal-api-zi92.onrender.com/jobs?status=approved`;
 
       // 2. Add Job Type filter if selected
       if (filterType) {

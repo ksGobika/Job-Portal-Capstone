@@ -9,7 +9,7 @@ export default function MyApplications() {
   // Fetch applications on load
   const fetchApps = () => {
     if (user) {
-      fetch(`http://localhost:5001/applications?seekerId=${user.id}`)
+      fetch(`https://job-portal-api-zi92.onrender.com/applications?seekerId=${user.id}`)
         .then(res => res.json())
         .then(data => setApps(data));
     }
@@ -23,7 +23,7 @@ export default function MyApplications() {
   const handleWithdraw = async (appId) => {
     if (window.confirm("Are you sure you want to withdraw this application?")) {
       try {
-        const res = await fetch(`http://localhost:5001/applications/${appId}`, {
+        const res = await fetch(`https://job-portal-api-zi92.onrender.com/applications/${appId}`, {
           method: 'DELETE',
         });
 

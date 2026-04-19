@@ -13,7 +13,7 @@ export default function ReviewApplicants() {
     if (user) {
       try {
         // Fetch applications belonging to this employer
-        const res = await fetch(`http://localhost:5001/applications?employerId=${user.id}`);
+        const res = await fetch(`https://job-portal-api-zi92.onrender.com/applications?employerId=${user.id}`);
         const data = await res.json();
         setApplications(data);
       } catch (error) {
@@ -31,7 +31,7 @@ export default function ReviewApplicants() {
   // Update Status Logic (Shortlist / Reject)
   const handleStatusUpdate = async (appId, newStatus) => {
     try {
-      const res = await fetch(`http://localhost:5001/applications/${appId}`, {
+      const res = await fetch(`https://job-portal-api-zi92.onrender.com/applications/${appId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus })

@@ -13,11 +13,11 @@ export default function JobPerformanceMetrics() {
       
       try {
         // 1. Fetch all jobs posted by THIS employer
-        const jobRes = await fetch(`http://localhost:5001/jobs?employerId=${user.id}`);
+        const jobRes = await fetch(`https://job-portal-api-zi92.onrender.com/jobs?employerId=${user.id}`);
         const jobs = await jobRes.json();
 
         // 2. Fetch all applications belonging to THIS employer
-        const appRes = await fetch(`http://localhost:5001/applications?employerId=${user.id}`);
+        const appRes = await fetch(`https://job-portal-api-zi92.onrender.com/applications?employerId=${user.id}`);
         const apps = await appRes.json();
 
         // 3. COMBINE AND COUNT (Strict Logic)

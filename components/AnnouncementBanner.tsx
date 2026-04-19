@@ -6,7 +6,7 @@ export default function AnnouncementBanner() {
 
   useEffect(() => {
     // Fetches the latest announcement from db.json
-    fetch('http://localhost:5001/announcements?_limit=1&_sort=id&_order=desc')
+    fetch('https://job-portal-api-zi92.onrender.com/announcements?_limit=1&_sort=id&_order=desc')
       .then(res => res.json())
       .then(data => { 
         if(data.length > 0) setMsg(data[0]); 
